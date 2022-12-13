@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { useState } from "react";
+import DoctorPageComponent from "./component/doctorpage";
+import HomePageComponent from "./component/homepage";
+import PatientPageComponent from "./component/patientpage";
+import SideBar from "./component/sidebar";
+import { usePageContext } from "./context/usePageContext";
+import ReportComponent from "./component/reportpage";
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  
+  const {pageNumber} = usePageContext()
+
+  if (pageNumber ===0) {
+    return (
+        <HomePageComponent/>
+    )
+  }
+  else if (pageNumber ===1){
+    return (      
+        <PatientPageComponent/>
+    )
+  }
+  else if (pageNumber ===2){
+    return (
+      <div >
+        <DoctorPageComponent/>
+      </div>
+    )
+  }
+  else {
+    return (
+      <div >
+        <ReportComponent/>
+      </div>
+    )
+  }
+
+
+
 }
 
 export default App;
